@@ -2,9 +2,9 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Product } from '../../types/Product';
 import { getProductsByCategory } from '../../api/products';
-import { ProductsList } from '../shared/components/ProductsList';
-import { Pagination } from '../shared/components/Pagination';
-import { Loader } from '../shared/components/Loader';
+import { ProductsList } from '../shared/components/ProductsList/ProductsList';
+import { Pagination } from '../shared/components/Pagination/Pagination';
+import { Loader } from '../shared/components/Loader/Loader';
 import styles from './ProductsPage.module.scss';
 
 interface Props {
@@ -18,6 +18,7 @@ export const ProductsPage: React.FC<Props> = ({ category }) => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const query = searchParams.get('query') || '';
   const sortBy = searchParams.get('sort') || 'age';
   const perPage = searchParams.get('perPage') || 'all';
   const currentPage = Number(searchParams.get('page')) || 1;
@@ -73,8 +74,20 @@ export const ProductsPage: React.FC<Props> = ({ category }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const filteredProducts = useMemo(() => {
+    const trimmedQuery = query.trim().toLowerCase();
+
+    if (!trimmedQuery) {
+      return products;
+    }
+
+    return products.filter((p) =>
+      p.name.toLowerCase().includes(trimmedQuery)
+    );
+  }, [products, query]);
+
   const sortedProducts = useMemo(() => {
-    const list = [...products];
+    const list = [...filteredProducts];
 
     if (sortBy === 'newest' || sortBy === 'age') {
       return list.sort((a, b) => b.year - a.year);
@@ -87,7 +100,7 @@ export const ProductsPage: React.FC<Props> = ({ category }) => {
     }
 
     return list;
-  }, [products, sortBy]);
+  }, [filteredProducts, sortBy]);
 
   const visibleProducts = useMemo(() => {
     if (perPage === 'all') {
@@ -115,7 +128,7 @@ export const ProductsPage: React.FC<Props> = ({ category }) => {
   return (
     <div className={styles.page}>
       <h1 className={styles.title}>{getTitle()}</h1>
-      <p className={styles.subtitle}>{products.length} models</p>
+      <p className={styles.subtitle}>{sortedProducts.length} models</p>
 
       {isLoading && <Loader />}
 
@@ -128,13 +141,15 @@ export const ProductsPage: React.FC<Props> = ({ category }) => {
         </div>
       )}
 
-      {!isLoading && !hasError && products.length === 0 && (
+      {!isLoading && !hasError && sortedProducts.length === 0 && (
         <div className={styles.messageBox}>
-          <p className={styles.emptyText}>There are no {category} yet</p>
+          <p className={styles.emptyText}>
+            {query ? 'There are no products matching the query' : `There are no ${category} yet`}
+          </p>
         </div>
       )}
 
-      {!isLoading && !hasError && products.length > 0 && (
+      {!isLoading && !hasError && sortedProducts.length > 0 && (
         <>
           <div className={styles.filters}>
             <div className={styles.filterGroup}>

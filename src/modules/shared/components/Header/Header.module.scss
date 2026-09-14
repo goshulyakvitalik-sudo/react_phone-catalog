@@ -124,3 +124,29 @@
   align-items: center;
   border: 1px solid $color-white;
 }
+
+.right {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.searchBox {
+  margin-right: 16px;
+}
+
+.searchInput {
+  width: 220px;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 9999px;
+  border: 1px solid #e2e6e9;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.2s ease, width 0.2s ease;
+
+  &:focus {
+    border-color: #4e61eb;
+    width: 260px;
+  }
+}
