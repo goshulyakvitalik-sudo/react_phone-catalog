@@ -15,11 +15,11 @@ export const ProductsSlider: React.FC<Props> = ({ title, products }) => {
   const maxPosition = Math.max(0, products.length - 4);
 
   const handlePrev = () => {
-    setPosition((prev) => Math.max(0, prev - 1));
+    setPosition(prev => Math.max(0, prev - 1));
   };
 
   const handleNext = () => {
-    setPosition((prev) => Math.min(maxPosition, prev + 1));
+    setPosition(prev => Math.min(maxPosition, prev + 1));
   };
 
   return (
@@ -56,7 +56,7 @@ export const ProductsSlider: React.FC<Props> = ({ title, products }) => {
             transform: `translateX(-${position * cardWidth}px)`,
           }}
         >
-          {products.map((product) => (
+          {products.map(product => (
             <div key={product.id} className={styles.cardItem}>
               <ProductCard product={product} />
             </div>

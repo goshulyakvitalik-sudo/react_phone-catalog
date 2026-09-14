@@ -12,20 +12,20 @@ export const PicturesSlider: React.FC = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length);
+      setCurrentIndex(prevIndex => (prevIndex + 1) % banners.length);
     }, 5000);
 
     return () => clearInterval(timer);
   }, []);
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? banners.length - 1 : prevIndex - 1
+    setCurrentIndex(prevIndex =>
+      prevIndex === 0 ? banners.length - 1 : prevIndex - 1,
     );
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length);
+    setCurrentIndex(prevIndex => (prevIndex + 1) % banners.length);
   };
 
   return (

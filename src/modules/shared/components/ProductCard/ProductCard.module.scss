@@ -5,6 +5,7 @@
   border: 1px solid #e2e6e9;
   border-radius: 16px;
   background-color: #ffffff;
+  overflow: hidden; 
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
 
   &:hover {
@@ -17,20 +18,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 210px;
+  width: 100%;
   margin-bottom: 24px;
   overflow: hidden;
-  height: 210px;
+  border-radius: 8px;
 }
 
 .image {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  transition: transform 0.3s ease;
+  display: block;
+  transition: transform 0.3s ease-in-out;
+}
 
-  &:hover {
-    transform: scale(1.1);
-  }
+.imageWrapper:hover .image,
+.card:hover .image {
+  transform: scale(1.1);
 }
 
 .title {

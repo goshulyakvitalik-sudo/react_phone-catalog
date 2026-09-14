@@ -28,7 +28,7 @@ export const ProductsPage: React.FC<Props> = ({ category }) => {
     setHasError(false);
 
     getProductsByCategory(category)
-      .then((data) => {
+      .then(data => {
         setProducts(data);
       })
       .catch(() => {
@@ -45,6 +45,7 @@ export const ProductsPage: React.FC<Props> = ({ category }) => {
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const nextParams = new URLSearchParams(searchParams);
+
     nextParams.set('sort', e.target.value);
     nextParams.delete('page');
     setSearchParams(nextParams);
@@ -59,17 +60,20 @@ export const ProductsPage: React.FC<Props> = ({ category }) => {
     } else {
       nextParams.set('perPage', val);
     }
+
     nextParams.delete('page');
     setSearchParams(nextParams);
   };
 
   const handlePageChange = (newPage: number) => {
     const nextParams = new URLSearchParams(searchParams);
+
     if (newPage === 1) {
       nextParams.delete('page');
     } else {
       nextParams.set('page', String(newPage));
     }
+
     setSearchParams(nextParams);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -81,9 +85,7 @@ export const ProductsPage: React.FC<Props> = ({ category }) => {
       return products;
     }
 
-    return products.filter((p) =>
-      p.name.toLowerCase().includes(trimmedQuery)
-    );
+    return products.filter(p => p.name.toLowerCase().includes(trimmedQuery));
   }, [products, query]);
 
   const sortedProducts = useMemo(() => {
@@ -92,9 +94,11 @@ export const ProductsPage: React.FC<Props> = ({ category }) => {
     if (sortBy === 'newest' || sortBy === 'age') {
       return list.sort((a, b) => b.year - a.year);
     }
+
     if (sortBy === 'alphabetically') {
       return list.sort((a, b) => a.name.localeCompare(b.name));
     }
+
     if (sortBy === 'cheapest') {
       return list.sort((a, b) => a.price - b.price);
     }
@@ -109,6 +113,7 @@ export const ProductsPage: React.FC<Props> = ({ category }) => {
 
     const itemsPerPage = Number(perPage);
     const start = (currentPage - 1) * itemsPerPage;
+
     return sortedProducts.slice(start, start + itemsPerPage);
   }, [sortedProducts, perPage, currentPage]);
 
@@ -144,7 +149,9 @@ export const ProductsPage: React.FC<Props> = ({ category }) => {
       {!isLoading && !hasError && sortedProducts.length === 0 && (
         <div className={styles.messageBox}>
           <p className={styles.emptyText}>
-            {query ? 'There are no products matching the query' : `There are no ${category} yet`}
+            {query
+              ? 'There are no products matching the query'
+              : `There are no ${category} yet`}
           </p>
         </div>
       )}

@@ -17,7 +17,7 @@ export const HomePage: React.FC = () => {
     setHasError(false);
 
     getProducts()
-      .then((data) => {
+      .then(data => {
         setProducts(data);
       })
       .catch(() => {
@@ -29,14 +29,16 @@ export const HomePage: React.FC = () => {
   }, []);
 
   const hotPricesProducts = [...products]
-    .filter((p) => p.fullPrice > p.price)
-    .sort((a, b) => (b.fullPrice - b.price) - (a.fullPrice - a.price));
+    .filter(p => p.fullPrice > p.price)
+    .sort((a, b) => b.fullPrice - b.price - (a.fullPrice - a.price));
 
   const brandNewProducts = [...products].sort((a, b) => b.year - a.year);
 
-  const phonesCount = products.filter((p) => p.category === 'phones').length;
-  const tabletsCount = products.filter((p) => p.category === 'tablets').length;
-  const accessoriesCount = products.filter((p) => p.category === 'accessories').length;
+  const phonesCount = products.filter(p => p.category === 'phones').length;
+  const tabletsCount = products.filter(p => p.category === 'tablets').length;
+  const accessoriesCount = products.filter(
+    p => p.category === 'accessories',
+  ).length;
 
   return (
     <div className={styles.page}>
@@ -62,7 +64,10 @@ export const HomePage: React.FC = () => {
             accessoriesCount={accessoriesCount}
           />
 
-          <ProductsSlider title="Brand new models" products={brandNewProducts} />
+          <ProductsSlider
+            title="Brand new models"
+            products={brandNewProducts}
+          />
         </>
       )}
     </div>

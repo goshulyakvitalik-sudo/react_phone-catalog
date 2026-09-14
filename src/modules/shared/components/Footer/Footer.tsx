@@ -35,16 +35,27 @@ export const Footer: React.FC = () => {
 
       <div className={styles.backToTop}>
         <span className={styles.backText}>Back to top</span>
-<button
-  type="button"
-  onClick={scrollToTop}
-  className={styles.scrollBtn}
-  aria-label="Back to top"
->
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path fillRule="evenodd" clipRule="evenodd" d="M7.52864 3.72393C7.78899 3.46358 8.2111 3.46358 8.47145 3.72393L13.1381 8.39059C13.3985 8.65094 13.3985 9.07305 13.1381 9.3334C12.8778 9.59375 12.4557 9.59375 12.1953 9.3334L8.00005 5.13814L3.80479 9.3334C3.54444 9.59375 3.12233 9.59375 2.86198 9.3334C2.60163 9.07305 2.60163 8.65094 2.86198 8.39059L7.52864 3.72393Z" fill="#0F0F11"/>
-  </svg>
-</button>
+        <button
+          type="button"
+          onClick={scrollToTop}
+          className={styles.scrollBtn}
+          aria-label="Back to top"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M7.52864 3.72393C7.78899 3.46358 8.2111 3.46358 8.47145 3.72393L13.1381 8.39059C13.3985 8.65094 13.3985 9.07305 13.1381 9.3334C12.8778 9.59375 12.4557 9.59375 12.1953 9.3334L8.00005 5.13814L3.80479 9.3334C3.54444 9.59375 3.12233 9.59375 2.86198 9.3334C2.60163 9.07305 2.60163 8.65094 2.86198 8.39059L7.52864 3.72393Z"
+              fill="#0F0F11"
+            />
+          </svg>
+        </button>
       </div>
     </footer>
   );

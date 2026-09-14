@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ProductDetails } from '../../types/ProductDetails';
 import { Product } from '../../types/Product';
-import { getProductDetails, getSuggestedProducts, getProducts } from '../../api/products';
+import {
+  getProductDetails,
+  getSuggestedProducts,
+  getProducts,
+} from '../../api/products';
 import { Breadcrumbs } from '../shared/components/Breadcrumbs';
 import { Loader } from '../shared/components/Loader';
 import { ProductsSlider } from '../shared/components/ProductsSlider';
@@ -24,7 +28,9 @@ export const ProductDetailsPage: React.FC = () => {
   const { toggleFavorite, isFavorite } = useFavorites();
 
   useEffect(() => {
-    if (!productId) return;
+    if (!productId) {
+      return;
+    }
 
     setIsLoading(true);
 
@@ -37,9 +43,11 @@ export const ProductDetailsPage: React.FC = () => {
         setProduct(details);
         if (details) {
           setSelectedImage(details.images[0]);
-          const found = allProducts.find((p) => p.itemId === details.id);
+          const found = allProducts.find(p => p.itemId === details.id);
+
           setCatalogProduct(found || null);
         }
+
         setSuggestedProducts(suggested);
       })
       .finally(() => {
@@ -60,7 +68,11 @@ export const ProductDetailsPage: React.FC = () => {
       <div className={styles.page}>
         <div className={styles.notFound}>
           <h2>Product was not found</h2>
-          <button type="button" onClick={() => navigate(-1)} className={styles.backBtn}>
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            className={styles.backBtn}
+          >
             Back
           </button>
         </div>
@@ -68,7 +80,9 @@ export const ProductDetailsPage: React.FC = () => {
     );
   }
 
-  const isInCart = catalogProduct ? cart.some((item) => item.product.id === catalogProduct.id) : false;
+  const isInCart = catalogProduct
+    ? cart.some(item => item.product.id === catalogProduct.id)
+    : false;
   const favorite = catalogProduct ? isFavorite(catalogProduct.id) : false;
 
   const handleAddToCart = () => {
@@ -89,7 +103,7 @@ export const ProductDetailsPage: React.FC = () => {
     const currentColor = product.color.toLowerCase();
 
     return parts
-      .map((p) => (p === currentCap ? newCapacity.toLowerCase() : p))
+      .map(p => (p === currentCap ? newCapacity.toLowerCase() : p))
       .join('-');
   };
 
@@ -98,7 +112,7 @@ export const ProductDetailsPage: React.FC = () => {
     const currentColor = product.color.toLowerCase();
 
     return parts
-      .map((p) => (p === currentColor ? newColor.toLowerCase() : p))
+      .map(p => (p === currentColor ? newColor.toLowerCase() : p))
       .join('-');
   };
 
@@ -111,7 +125,7 @@ export const ProductDetailsPage: React.FC = () => {
       <div className={styles.mainGrid}>
         <div className={styles.gallery}>
           <div className={styles.thumbnails}>
-            {product.images.map((img) => (
+            {product.images.map(img => (
               <button
                 key={img}
                 type="button"
@@ -123,7 +137,11 @@ export const ProductDetailsPage: React.FC = () => {
             ))}
           </div>
           <div className={styles.mainImgBox}>
-            <img src={`./${selectedImage}`} alt={product.name} className={styles.mainImg} />
+            <img
+              src={`./${selectedImage}`}
+              alt={product.name}
+              className={styles.mainImg}
+            />
           </div>
         </div>
 
@@ -131,7 +149,7 @@ export const ProductDetailsPage: React.FC = () => {
           <div className={styles.selectorSection}>
             <span className={styles.selectorTitle}>Available colors</span>
             <div className={styles.colorList}>
-              {product.colorsAvailable.map((color) => (
+              {product.colorsAvailable.map(color => (
                 <Link
                   key={color}
                   to={`/product/${getColorLink(color)}`}
@@ -146,7 +164,7 @@ export const ProductDetailsPage: React.FC = () => {
           <div className={styles.selectorSection}>
             <span className={styles.selectorTitle}>Select capacity</span>
             <div className={styles.capacityList}>
-              {product.capacityAvailable.map((cap) => (
+              {product.capacityAvailable.map(cap => (
                 <Link
                   key={cap}
                   to={`/product/${getCapacityLink(cap)}`}
@@ -161,7 +179,9 @@ export const ProductDetailsPage: React.FC = () => {
           <div className={styles.prices}>
             <span className={styles.price}>${product.priceDiscount}</span>
             {product.priceRegular > product.priceDiscount && (
-              <span className={styles.regularPrice}>${product.priceRegular}</span>
+              <span className={styles.regularPrice}>
+                ${product.priceRegular}
+              </span>
             )}
           </div>
 
@@ -208,7 +228,7 @@ export const ProductDetailsPage: React.FC = () => {
       <div className={styles.detailsGrid}>
         <div className={styles.aboutCol}>
           <h2 className={styles.sectionHeading}>About</h2>
-          {product.description.map((item) => (
+          {product.description.map(item => (
             <div key={item.title} className={styles.aboutItem}>
               <h3 className={styles.aboutTitle}>{item.title}</h3>
               {item.text.map((paragraph, idx) => (

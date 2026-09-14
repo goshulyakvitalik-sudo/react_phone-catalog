@@ -9,7 +9,11 @@ interface Props {
   onRemove: (id: string) => void;
 }
 
-export const CartItem: React.FC<Props> = ({ item, onQuantityChange, onRemove }) => {
+export const CartItem: React.FC<Props> = ({
+  item,
+  onQuantityChange,
+  onRemove,
+}) => {
   const { product, quantity } = item;
 
   return (
@@ -24,7 +28,11 @@ export const CartItem: React.FC<Props> = ({ item, onQuantityChange, onRemove }) 
       </button>
 
       <Link to={`/product/${product.itemId}`} className={styles.imageBox}>
-        <img src={`./${product.image}`} alt={product.name} className={styles.image} />
+        <img
+          src={`./${product.image}`}
+          alt={product.name}
+          className={styles.image}
+        />
       </Link>
 
       <Link to={`/product/${product.itemId}`} className={styles.name}>
@@ -54,9 +62,7 @@ export const CartItem: React.FC<Props> = ({ item, onQuantityChange, onRemove }) 
         </button>
       </div>
 
-      <div className={styles.price}>
-        ${product.price * quantity}
-      </div>
+      <div className={styles.price}>${product.price * quantity}</div>
     </div>
   );
 };

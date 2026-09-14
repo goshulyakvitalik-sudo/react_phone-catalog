@@ -13,8 +13,9 @@ export const FavoritesPage: React.FC = () => {
     if (!query.trim()) {
       return favorites;
     }
-    return favorites.filter((p) =>
-      p.name.toLowerCase().includes(query.toLowerCase().trim())
+
+    return favorites.filter(p =>
+      p.name.toLowerCase().includes(query.toLowerCase().trim()),
     );
   }, [favorites, query]);
 

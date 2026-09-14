@@ -1,16 +1,23 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
-import { CartItem } from "./CartItem";
+import { CartItem } from './CartItem';
 import styles from './CartPage.module.scss';
 
 export const CartPage: React.FC = () => {
   const navigate = useNavigate();
-  const { cart, changeQuantity, removeFromCart, clearCart, totalCount, totalPrice } = useCart();
+  const {
+    cart,
+    changeQuantity,
+    removeFromCart,
+    clearCart,
+    totalCount,
+    totalPrice,
+  } = useCart();
 
   const handleCheckout = () => {
     const confirmed = window.confirm(
-      'Checkout is not implemented yet. Do you want to clear the Cart?'
+      'Checkout is not implemented yet. Do you want to clear the Cart?',
     );
 
     if (confirmed) {
@@ -46,7 +53,7 @@ export const CartPage: React.FC = () => {
       ) : (
         <div className={styles.content}>
           <div className={styles.itemsList}>
-            {cart.map((item) => (
+            {cart.map(item => (
               <CartItem
                 key={item.id}
                 item={item}

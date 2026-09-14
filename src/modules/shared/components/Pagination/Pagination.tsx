@@ -20,10 +20,39 @@ export const Pagination: React.FC<Props> = ({
     return null;
   }
 
-  const pages = [];
-  for (let i = 1; i <= pageCount; i = i + 1) {
-    pages.push(i);
-  }
+  const getPages = () => {
+    const pages: (number | string)[] = [];
+
+    if (pageCount <= 5) {
+      for (let i = 1; i <= pageCount; i = i + 1) {
+        pages.push(i);
+      }
+      return pages;
+    }
+
+    pages.push(1);
+
+    if (currentPage > 3) {
+      pages.push('...');
+    }
+
+    const start = Math.max(2, currentPage - 1);
+    const end = Math.min(pageCount - 1, currentPage + 1);
+
+    for (let i = start; i <= end; i = i + 1) {
+      pages.push(i);
+    }
+
+    if (currentPage < pageCount - 2) {
+      pages.push('...');
+    }
+
+    pages.push(pageCount);
+
+    return pages;
+  };
+
+  const pages = getPages();
 
   return (
     <div className={styles.pagination}>
@@ -38,16 +67,22 @@ export const Pagination: React.FC<Props> = ({
       </button>
 
       <div className={styles.pagesList}>
-        {pages.map((page) => (
-          <button
-            key={page}
-            type="button"
-            onClick={() => onPageChange(page)}
-            className={`${styles.pageItem} ${currentPage === page ? styles.active : ''}`}
-          >
-            {page}
-          </button>
-        ))}
+        {pages.map((page, idx) =>
+          typeof page === 'number' ? (
+            <button
+              key={page}
+              type="button"
+              onClick={() => onPageChange(page)}
+              className={`${styles.pageItem} ${currentPage === page ? styles.active : ''}`}
+            >
+              {page}
+            </button>
+          ) : (
+            <span key={`dots-${idx}`} className={styles.dots}>
+              {page}
+            </span>
+          )
+        )}
       </div>
 
       <button
