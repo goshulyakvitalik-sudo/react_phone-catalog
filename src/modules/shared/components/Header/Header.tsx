@@ -3,6 +3,7 @@ import { NavLink, Link, useLocation, useSearchParams } from 'react-router-dom';
 import { useCart } from '../../../../context/CartContext';
 import { useFavorites } from '../../../../context/FavoritesContext';
 import styles from './Header.module.scss';
+import logoSrc from '/img/Logo.svg';
 
 export const Header: React.FC = () => {
   const { totalCount } = useCart();
@@ -40,7 +41,7 @@ export const Header: React.FC = () => {
     <header className={styles.header}>
       <div className={styles.left}>
         <Link to="/" className={styles.logo}>
-          <img src="./img/Logo.svg" alt="Nice Gadgets" />
+          <img src={logoSrc} alt="Nice Gadgets" />
         </Link>
 
         <nav className={styles.nav}>

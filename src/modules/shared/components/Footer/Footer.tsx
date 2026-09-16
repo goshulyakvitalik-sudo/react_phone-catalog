@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Footer.module.scss';
+import logoSrc from '/img/Logo.svg';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -13,7 +14,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className={styles.footer}>
       <Link to="/" className={styles.logo}>
-        <img src="/img/Logo.svg" alt="Nice Gadgets" />
+        <img src={logoSrc} alt="Nice Gadgets" />
       </Link>
 
       <div className={styles.links}>
