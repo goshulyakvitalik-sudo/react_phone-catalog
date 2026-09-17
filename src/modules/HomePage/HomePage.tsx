@@ -42,7 +42,7 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>Welcome to NICE GADGETS store!</h1>
+      <h1 className={styles.title}>Welcome to Nice Gadgets store!</h1>
 
       <PicturesSlider />
 
