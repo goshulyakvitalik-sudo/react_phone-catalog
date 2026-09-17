@@ -42,7 +42,8 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>Welcome to Nice Gadgets store!</h1>
+      <h1 className="is-sr-only">Product Catalog</h1>
+<h2 className={styles.title}>Welcome to Nice Gadgets store!</h2>
 
       <PicturesSlider />
 
