@@ -28,14 +28,15 @@
   cursor: pointer;
   transition: all 0.3s ease;
 
-  &:hover:not(:disabled) {
-    border-color: #4e61eb;
-    color: #4e61eb;
-  }
 
   &:disabled {
     opacity: 0.4;
     cursor: not-allowed;
+  }
+  
+  &:hover:not(:disabled) {
+    border-color: #4e61eb;
+    color: #4e61eb;
   }
 }
 

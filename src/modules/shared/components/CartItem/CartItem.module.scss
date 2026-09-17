@@ -75,13 +75,13 @@
   cursor: pointer;
   transition: all 0.2s ease;
 
-  &:hover:not(:disabled) {
-    border-color: #0f0f11;
-  }
-
   &:disabled {
     opacity: 0.3;
     cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: #0f0f11;
   }
 }
 
