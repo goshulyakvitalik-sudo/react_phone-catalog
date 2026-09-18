@@ -18,7 +18,7 @@
   height: 32px;
   border-radius: 9999px;
   border: 1px solid #e2e6e9;
-  background-color: #ffffff;
+  background-color: #fff;
   color: #0f0f11;
   font-size: 14px;
   font-weight: 600;
@@ -33,7 +33,7 @@
     opacity: 0.4;
     cursor: not-allowed;
   }
-  
+
   &:hover:not(:disabled) {
     border-color: #4e61eb;
     color: #4e61eb;
@@ -43,11 +43,11 @@
 .active {
   background-color: #4e61eb;
   border-color: #4e61eb;
-  color: #ffffff;
+  color: #fff;
 
   &:hover {
     background-color: #3b4ecc;
-    color: #ffffff;
+    color: #fff;
   }
 }
 
