@@ -100,7 +100,7 @@ export const ProductDetailsPage: React.FC = () => {
   const getCapacityLink = (newCapacity: string) => {
     const parts = product.id.split('-');
     const currentCap = product.capacity.toLowerCase();
-    const currentColor = product.color.toLowerCase();
+    //const currentColor = product.color.toLowerCase();
 
     return parts
       .map(p => (p === currentCap ? newCapacity.toLowerCase() : p))

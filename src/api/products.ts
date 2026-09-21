@@ -2,7 +2,7 @@ import { Product } from '../types/Product';
 import { ProductDetails } from '../types/ProductDetails';
 
 function wait(delay: number): Promise<void> {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(resolve, delay);
   });
 }
@@ -18,23 +18,31 @@ export async function getProducts(): Promise<Product[]> {
   return response.json();
 }
 
-export async function getProductsByCategory(category: string): Promise<Product[]> {
+export async function getProductsByCategory(
+  category: string,
+): Promise<Product[]> {
   const products = await getProducts();
-  return products.filter((product) => product.category === category);
+
+  return products.filter(product => product.category === category);
 }
 
-export async function getProductDetails(productId: string): Promise<ProductDetails | null> {
+export async function getProductDetails(
+  productId: string,
+): Promise<ProductDetails | null> {
   await wait(300);
 
   const categories = ['phones', 'tablets', 'accessories'];
 
   for (let i = 0; i < categories.length; i = i + 1) {
     const category = categories[i];
+
     try {
       const response = await fetch(`./api/${category}.json`);
+
       if (response.ok) {
         const items: ProductDetails[] = await response.json();
-        const found = items.find((item) => item.id === productId);
+        const found = items.find(item => item.id === productId);
+
         if (found) {
           return found;
         }
@@ -49,5 +57,6 @@ export async function getProductDetails(productId: string): Promise<ProductDetai
 
 export async function getSuggestedProducts(): Promise<Product[]> {
   const products = await getProducts();
+
   return [...products].sort(() => 0.5 - Math.random()).slice(0, 8);
 }

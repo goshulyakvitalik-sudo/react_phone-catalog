@@ -27,6 +27,7 @@ export const Pagination: React.FC<Props> = ({
       for (let i = 1; i <= pageCount; i = i + 1) {
         pages.push(i);
       }
+
       return pages;
     }
 
@@ -81,7 +82,7 @@ export const Pagination: React.FC<Props> = ({
             <span key={`dots-${idx}`} className={styles.dots}>
               {page}
             </span>
-          )
+          ),
         )}
       </div>
 

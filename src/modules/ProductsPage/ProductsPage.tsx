@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Product } from '../../types/Product';
 import { getProductsByCategory } from '../../api/products';
@@ -23,7 +23,7 @@ export const ProductsPage: React.FC<Props> = ({ category }) => {
   const perPage = searchParams.get('perPage') || 'all';
   const currentPage = Number(searchParams.get('page')) || 1;
 
-  const loadData = () => {
+  const loadData = useCallback(() => {
     setIsLoading(true);
     setHasError(false);
 
@@ -37,11 +37,11 @@ export const ProductsPage: React.FC<Props> = ({ category }) => {
       .finally(() => {
         setIsLoading(false);
       });
-  };
+  }, [category]);
 
   useEffect(() => {
     loadData();
-  }, [category]);
+  }, [loadData]);
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const nextParams = new URLSearchParams(searchParams);

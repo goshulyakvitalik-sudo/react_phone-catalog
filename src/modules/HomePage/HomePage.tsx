@@ -3,7 +3,7 @@ import { Product } from '../../types/Product';
 import { getProducts } from '../../api/products';
 import { PicturesSlider } from './PicturesSlider';
 import { CategoriesBlock } from './CategoriesBlock';
-import { ProductsSlider } from '../shared/components/ProductsSlider/ProductsSlider';
+import { ProductsSlider } from '../shared/components/ProductsSlider';
 import { Loader } from '../shared/components/Loader/Loader';
 import styles from './HomePage.module.scss';
 
