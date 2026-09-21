@@ -67,7 +67,7 @@
   height: 32px;
   border-radius: 9999px;
   border: 1px solid #e2e6e9;
-  background-color: #ffffff;
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,11 +75,12 @@
   cursor: pointer;
   transition: all 0.2s ease;
 
-  &:hover:not(:disabled) {
+  &:hover {
     border-color: #0f0f11;
   }
 
   &:disabled {
+    border-color: #e2e6e9;
     opacity: 0.3;
     cursor: not-allowed;
   }
